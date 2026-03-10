@@ -1,6 +1,6 @@
 # llamacpp-agentified
 
-Self-contained LLM inference container powered by [llama.cpp](https://github.com/ggerganov/llama.cpp). Each container instance loads a single GGUF model and exposes an OpenAI-compatible API.
+Self-contained LLM inference container powered by [llama.cpp](https://github.com/ggerganov/llama.cpp). Uses the official `llama-server` binary (multi-stage Docker build) for maximum model compatibility. Each container instance loads a single GGUF model and exposes an OpenAI-compatible API.
 
 Designed to be spawned by [llamacpp-router-agentified](https://github.com/zimdin12/llamacpp-router-agentified) as a sub-container, but also works standalone.
 
@@ -26,6 +26,8 @@ First startup downloads the model from HuggingFace — this may take a few minut
 
 | Config Name | Model | Size | Type | Context |
 |---|---|---|---|---|
+| `qwen3.5-0.8b` | Qwen3.5 0.8B Q4_K_M | ~0.5 GB | chat | 8K |
+| `qwen3-0.6b` | Qwen3 0.6B Q8_0 | ~0.7 GB | chat | 8K |
 | `qwen3-1.7b` | Qwen3 1.7B Q4_K_M | ~1.1 GB | chat | 32K |
 | `qwen3-4b` | Qwen3 4B Q4_K_M | ~2.5 GB | chat | 32K |
 | `qwen3-8b` | Qwen3 8B Q4_K_M | ~4.9 GB | chat | 32K |
