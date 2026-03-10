@@ -79,7 +79,7 @@ def build_server_args(model_path: str, model_config: dict) -> list:
         args.extend(["--threads", str(n_threads)])
 
     if flash_attn:
-        args.append("--flash-attn")
+        args.extend(["--flash-attn", "on"])
 
     # Embedding model: enable embedding endpoint
     if model_config.get("type") == "embedding":
