@@ -1,10 +1,10 @@
 {
-  "repo": "lm-kit/qwen3-embedding-0.6b-gguf",
-  "filename": "Qwen3-Embedding-0.6B-F16.gguf",
+  "repo": "Qwen/Qwen3-Embedding-0.6B-GGUF",
+  "filename": "Qwen3-Embedding-0.6B-f16.gguf",
   "context_length": 8192,
   "gpu_layers": -1,
   "chat_format": null,
-  "description": "Qwen3 Embedding 0.6B - text embedding model",
+  "description": "Qwen3 Embedding 0.6B F16 - text embedding model",
   "type": "embedding",
   "embedding_dims": 1024
 }

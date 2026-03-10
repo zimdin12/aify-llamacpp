@@ -1,6 +1,7 @@
 """Health endpoints for llamacpp-agentified."""
 
 from fastapi import APIRouter, Request
+from fastapi.responses import JSONResponse
 
 router = APIRouter(tags=["health"])
 
@@ -10,7 +11,7 @@ async def health(request: Request):
     loader = getattr(request.app.state, "loader", None)
     if loader and loader.is_loaded:
         return {"status": "healthy"}
-    return {"status": "loading"}, 503
+    return JSONResponse({"status": "loading"}, status_code=503)
 
 
 @router.get("/ready")

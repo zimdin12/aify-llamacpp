@@ -1,8 +1,4 @@
-# =============================================================================
-# llamacpp-agentified — Self-contained LLM inference
-# =============================================================================
-# Set MODEL_NAME in .env to select which model to load.
-
+# CPU-only compose (no GPU reservation)
 services:
   inference:
     build:
@@ -27,11 +23,6 @@ services:
         limits:
           cpus: "${CPU_LIMIT:-4}"
           memory: ${MEMORY_LIMIT:-8g}
-        reservations:
-          devices:
-            - driver: nvidia
-              count: ${GPU_COUNT:-all}
-              capabilities: [gpu]
     networks:
       - inference-network
 
