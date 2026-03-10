@@ -55,7 +55,7 @@ Create a JSON file in `config/models/`:
 - `repo` — HuggingFace repo ID
 - `filename` — GGUF file within the repo
 - `type` — `"chat"` or `"embedding"`
-- `chat_format` — llama-cpp-python chat format (`"chatml"`, `"mistral-instruct"`, `"llama-2"`, etc.)
+- `chat_format` — chat template hint (usually `null` — llama-server auto-detects from GGUF metadata)
 - `embedding_dims` — set for embedding models, `null` for chat models
 
 Then set `MODEL_NAME=your-config-name` in `.env`.
@@ -82,15 +82,21 @@ Then set `MODEL_NAME=your-config-name` in `.env`.
 
 ## GPU Support
 
-By default, builds CPU-only. For CUDA GPU acceleration:
+The Docker image includes **both CPU and CUDA GPU backends** — no separate build needed. GPU is auto-detected at runtime; if no GPU is available it falls back to CPU automatically.
+
+To enable GPU access, run with `--gpus all` (or use the router which passes GPUs automatically):
 
 ```bash
-# In .env or docker-compose build args:
-CMAKE_ARGS=-DGGML_CUDA=on
-
-# Or build directly:
-docker compose build --build-arg CMAKE_ARGS="-DGGML_CUDA=on"
+docker compose up -d --build
+# GPU is detected automatically if available
 ```
+
+**Benchmark (Qwen3.5 0.8B Q4_K_M):**
+
+| | CPU | GPU (RTX 3050) |
+|---|---|---|
+| Prompt processing | 73 tok/s | 113 tok/s |
+| Generation | 23 tok/s | 83 tok/s |
 
 ### GPU Configuration
 
@@ -131,15 +137,15 @@ llamacpp-agentified/
 │   ├── qwen3-8b.json
 │   └── ...
 ├── service/
-│   ├── main.py              # FastAPI app with model lifecycle
+│   ├── entrypoint.py        # Downloads model, launches llama-server
 │   ├── config.py            # Environment-based configuration
-│   ├── model_loader.py      # Download + load GGUF models
+│   ├── main.py              # FastAPI app (alternative approach)
 │   └── routers/
 │       ├── health.py        # /health, /ready, /info
 │       └── openai_compat.py # /v1/* OpenAI-compatible API
 ├── scripts/
 │   └── download_model.sh    # Pre-download helper
-├── Dockerfile               # Python 3.12 + llama-cpp-python
+├── Dockerfile               # Multi-stage: llama-server (CUDA) + Python 3.12
 ├── docker-compose.yml
 └── .env.example
 ```
