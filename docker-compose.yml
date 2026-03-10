@@ -1,0 +1,45 @@
+# =============================================================================
+# llamacpp-agentified — Self-contained LLM inference
+# =============================================================================
+# Set MODEL_NAME in .env to select which model to load.
+
+services:
+  inference:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CMAKE_ARGS: ${CMAKE_ARGS:-}
+    container_name: ${COMPOSE_PROJECT_NAME:-llamacpp}-inference
+    restart: ${RESTART_POLICY:-unless-stopped}
+    ports:
+      - "${SERVICE_PORT:-8080}:8080"
+    volumes:
+      - ${DATA_VOLUME_NAME:-llamacpp-data}:/data
+      - ./config:/app/config:ro
+    env_file:
+      - .env
+    environment:
+      - MODEL_NAME=${MODEL_NAME:-qwen3-4b}
+      - MODEL_DIR=/data/models
+    deploy:
+      resources:
+        limits:
+          cpus: "${CPU_LIMIT:-4}"
+          memory: ${MEMORY_LIMIT:-8g}
+        reservations:
+          devices:
+            - driver: nvidia
+              count: ${GPU_COUNT:-all}
+              capabilities: [gpu]
+    networks:
+      - inference-network
+
+volumes:
+  llamacpp-data:
+    name: ${DATA_VOLUME_NAME:-llamacpp-data}
+
+networks:
+  inference-network:
+    name: ${COMPOSE_PROJECT_NAME:-llamacpp}-network
+    driver: bridge
