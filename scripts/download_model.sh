@@ -1,5 +1,5 @@
 #!/bin/bash
-# Download a model for llamacpp-agentified
+# Download a model for aify-llamacpp
 # Usage: ./scripts/download_model.sh <model-name>
 # Example: ./scripts/download_model.sh qwen3-4b
 

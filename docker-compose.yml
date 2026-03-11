@@ -1,5 +1,5 @@
 # =============================================================================
-# llamacpp-agentified — Self-contained LLM inference
+# aify-llamacpp — Self-contained LLM inference
 # =============================================================================
 # Set MODEL_NAME in .env to select which model to load.
 

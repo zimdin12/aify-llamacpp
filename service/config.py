@@ -1,5 +1,5 @@
 """
-llamacpp-agentified — Configuration
+aify-llamacpp — Configuration
 """
 
 import os

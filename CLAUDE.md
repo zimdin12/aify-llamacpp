@@ -1,4 +1,4 @@
-# llamacpp-agentified
+# aify-llamacpp
 
 Self-contained LLM inference container. One model per container, selected via `MODEL_NAME` env var.
 

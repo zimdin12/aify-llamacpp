@@ -1,8 +1,8 @@
-# llamacpp-agentified
+# aify-llamacpp
 
 Self-contained LLM inference container powered by [llama.cpp](https://github.com/ggerganov/llama.cpp). Uses the official `llama-server` binary (multi-stage Docker build) for maximum model compatibility. Each container instance loads a single GGUF model and exposes an OpenAI-compatible API.
 
-Designed to be spawned by [llamacpp-router-agentified](https://github.com/zimdin12/llamacpp-router-agentified) as a sub-container, but also works standalone.
+Designed to be spawned by [aify-llamacpp-router](https://github.com/zimdin12/aify-llamacpp-router) as a sub-container, but also works standalone.
 
 ## Quick Start
 
@@ -131,7 +131,7 @@ bash scripts/download_model.sh qwen3-4b
 ## Project Structure
 
 ```
-llamacpp-agentified/
+aify-llamacpp/
 ├── config/models/           # Model configs (repo, filename, params)
 │   ├── qwen3-4b.json
 │   ├── qwen3-8b.json
@@ -152,6 +152,6 @@ llamacpp-agentified/
 
 ## Related Projects
 
-- **[llamacpp-router-agentified](https://github.com/zimdin12/llamacpp-router-agentified)** — Ollama-like router that manages multiple llamacpp-agentified containers
-- **[openmemory-agentified](https://github.com/zimdin12/openmemory-agentified)** — Hybrid memory system that can use this as its LLM backend
-- **[agentify-container](https://github.com/zimdin12/agentify-container)** — The base template these projects build on
+- **[aify-llamacpp-router](https://github.com/zimdin12/aify-llamacpp-router)** — Ollama-like router that manages multiple aify-llamacpp containers
+- **[aify-openmemory](https://github.com/zimdin12/aify-openmemory)** — Hybrid memory system that can use this as its LLM backend
+- **[aify-container](https://github.com/zimdin12/aify-container)** — The base template these projects build on

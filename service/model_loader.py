@@ -1,5 +1,5 @@
 """
-llamacpp-agentified — Model Loader
+aify-llamacpp — Model Loader
 
 Reads model config JSON, downloads GGUF from HuggingFace if needed,
 and loads via llama-cpp-python.

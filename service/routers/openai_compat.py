@@ -1,5 +1,5 @@
 """
-OpenAI-compatible API endpoints for llamacpp-agentified.
+OpenAI-compatible API endpoints for aify-llamacpp.
 
 Provides /v1/chat/completions, /v1/completions, /v1/embeddings, /v1/models.
 """
@@ -212,7 +212,7 @@ async def list_models(request: Request):
             "id": loader.config.model_name,
             "object": "model",
             "created": int(time.time()),
-            "owned_by": "llamacpp-agentified",
+            "owned_by": "aify-llamacpp",
             "permission": [],
             "root": loader.config.model_name,
             "parent": None,

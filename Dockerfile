@@ -1,5 +1,5 @@
 # ==============================================================================
-# llamacpp-agentified — Self-contained LLM inference
+# aify-llamacpp — Self-contained LLM inference
 # ==============================================================================
 # Uses official llama.cpp server for inference (latest model support)
 # + Python for model download and management

@@ -1,5 +1,5 @@
 """
-llamacpp-agentified — Main FastAPI Application
+aify-llamacpp — Main FastAPI Application
 
 Self-contained LLM inference container. Loads a single model on startup,
 exposes OpenAI-compatible API.
@@ -28,7 +28,7 @@ async def lifespan(app: FastAPI):
         force=True,
     )
 
-    logger.info(f"Starting llamacpp-agentified, model={config.model_name}")
+    logger.info(f"Starting aify-llamacpp, model={config.model_name}")
 
     # Load model
     loader = ModelLoader(config)
@@ -51,7 +51,7 @@ async def lifespan(app: FastAPI):
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        title="llamacpp-agentified",
+        title="aify-llamacpp",
         version="1.0.0",
         description="Self-contained LLM inference via llama.cpp",
         lifespan=lifespan,

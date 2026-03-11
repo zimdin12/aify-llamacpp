@@ -1,5 +1,5 @@
 """
-llamacpp-agentified — Entrypoint
+aify-llamacpp — Entrypoint
 
 1. Downloads the model from HuggingFace if not cached
 2. Launches llama-server (official llama.cpp server) as a subprocess
@@ -84,6 +84,21 @@ def build_server_args(model_path: str, model_config: dict) -> list:
     # Embedding model: enable embedding endpoint
     if model_config.get("type") == "embedding":
         args.append("--embedding")
+
+    # Extra args from model config (e.g. --reasoning-budget, --no-mmap, --jinja, --cache-type-k)
+    extra = model_config.get("extra_args", [])
+    if extra:
+        # Filter out args already set via env vars to avoid duplicates
+        skip_next = False
+        for i, arg in enumerate(extra):
+            if skip_next:
+                skip_next = False
+                continue
+            # Skip --flash-attn (handled above), --n-gpu-layers (handled above)
+            if arg in ("--flash-attn", "-fa", "--n-gpu-layers", "-ngl"):
+                skip_next = True  # skip the value too
+                continue
+            args.append(arg)
 
     return args
 

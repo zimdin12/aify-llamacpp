@@ -1,4 +1,4 @@
-"""Health endpoints for llamacpp-agentified."""
+"""Health endpoints for aify-llamacpp."""
 
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
@@ -33,7 +33,7 @@ async def info(request: Request):
     base = f"http://{host}"
 
     return {
-        "name": "llamacpp-agentified",
+        "name": "aify-llamacpp",
         "version": "1.0.0",
         "model": loader.model_info if loader else None,
         "endpoints": {
